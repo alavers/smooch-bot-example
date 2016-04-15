@@ -48,6 +48,6 @@ To deploy your own:
 
 1. You should be all set. Open your Heroku app and start chatting with your new bot!
 
-1. **Bonus:** Open the Smooch [control panel](https://app.smooch.io) and add more integraitons. You can add new user channels like Twilio SMS, or you can add Slack or HipChat which will let you join in on the conversation along side your bot. Pretty neat!
+1. **Bonus:** Open the Smooch [control panel](https://app.smooch.io) and add more integrations. You can add new user channels like Twilio SMS, or you can add Slack or HipChat which will let you join in on the conversation along side your bot. Pretty neat!
 
 ![slack](/img/slack.png)
