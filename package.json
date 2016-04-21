@@ -1,8 +1,8 @@
 {
-  "name": "smooch-bot-example",
+  "name": "brody-bot",
   "version": "1.0.0",
-  "description": "Smooch Bot Example Apps",
-  "author": "Andrew Lavers <alavers@system42.net> (http://smooch.io/)",
+  "description": "Brody Bot chat bot forked from Smooch.io",
+  "author": "Brody Berson <brody.berson@me.com> (http://brodyberson.com/)",
   "scripts": {
     "start": "node heroku"
   },
