@@ -10,8 +10,8 @@ const script = require('../script');
 const SmoochCore = require('smooch-core');
 const jwt = require('../jwt');
 
-const name = 'SmoochBot';
-const avatarUrl = 'https://s.gravatar.com/avatar/f91b04087e0125153623a3778e819c0a?s=80';
+const name = 'BrodyBot';
+const avatarUrl = 'https://en.gravatar.com/userimage/50862026/28ce7a84cd60bd822f957140f2e0da3f.jpg';
 const store = new SmoochApiStore({
     jwt
 });
@@ -83,5 +83,5 @@ var server = app.listen(process.env.PORT || 8000, function() {
     var host = server.address().address;
     var port = server.address().port;
 
-    console.log('Smooch Bot listening at http://%s:%s', host, port);
+    console.log('Brody Bot listening at http://%s:%s', host, port);
 });
