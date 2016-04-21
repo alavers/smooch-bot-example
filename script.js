@@ -10,7 +10,7 @@ module.exports = new Script({
 
     start: {
         receive: (bot) => {
-            return bot.say('Hi! I\'m Brody Bot! I can tell you all about Brody.')
+            return bot.say('Hi! I\'m Brody Bot! I can tell you all about Brody Berson.')
                 .then(() => 'askName');
         }
     },
@@ -28,8 +28,8 @@ module.exports = new Script({
     finish: {
         receive: (bot, message) => {
             return bot.getProp('name')
-                .then((name) => bot.say(`Sorry ${name}, my creator didn't ` +
-                        'teach me how to do anything else!'))
+                .then((name) => bot.say(`Sorry ${name}, Brody is still working on me. ` +
+                        'Feel free to email him at brody.berson@me.com in the meantime...'))
                 .then(() => 'finish');
         }
     }
