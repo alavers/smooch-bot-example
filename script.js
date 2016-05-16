@@ -21,9 +21,18 @@ module.exports = new Script({
             const name = message.text;
             return bot.setProp('name', name)
                 .then(() => bot.say(`Great! I'll call you ${name}`))
-                .then(() => 'finish');
+                .then(() => 'test');
         }
     },
+    
+    test: {
+        receive: (bot, message) => {
+            if (message.text.indexOf("weather") > 0) {
+                bot.say(`The weather where you are is... I don't know.`);
+            }
+            return bot.then(() => 'finish');
+        }
+    }
 
     finish: {
         receive: (bot, message) => {
