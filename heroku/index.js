@@ -16,17 +16,31 @@ const store = new SmoochApiStore({
     jwt
 });
 const lock = new MemoryLock();
+const webhookTriggers = ['message:appUser', 'postback'];
 
 function createWebhook(smoochCore, target) {
     return smoochCore.webhooks.create({
         target,
-        triggers: ['message:appUser']
+        triggers: webhookTriggers
     })
         .then((res) => {
-            console.log('Smooch webhook created at target', res.webhook.target);
+            console.log('Smooch webhook created with target', res.webhook.target);
         })
         .catch((err) => {
             console.error('Error creating Smooch webhook:', err);
+            console.error(err.stack);
+        });
+}
+
+function updateWebhook(smoochCore, existingWebhook) {
+    return smoochCore.webhooks.update(existingWebhook._id, {
+        triggers: webhookTriggers
+    })
+        .then((res) => {
+            console.log('Smooch webhook updated with missing triggers', res.webhook.target);
+        })
+        .catch((err) => {
+            console.error('Error updating Smooch webhook:', err);
             console.error(err.stack);
         });
 }
@@ -39,13 +53,34 @@ if (process.env.SERVICE_URL) {
     });
     smoochCore.webhooks.list()
         .then((res) => {
-            if (!res.webhooks.some((w) => w.target === target)) {
-                createWebhook(smoochCore, target);
+            const existingWebhook = res.webhooks.find((w) => w.target === target);
+
+            if (!existingWebhook) {
+                return createWebhook(smoochCore, target);
+            }
+
+            const missingTriggers = webhookTriggers.every((t) => {
+                return existingWebhook.triggers.indexOf(t) !== -1;
+            });
+
+            if (!missingTriggers) {
+                updateWebhook(smoochCore, existingWebhook);
             }
         });
 }
 
-app.post('/webhook', function(req, res, next) {
+function createBot(appUser) {
+    const userId = appUser.userId || appUser._id;
+    return new SmoochApiBot({
+        name,
+        avatarUrl,
+        lock,
+        store,
+        userId
+    });
+}
+
+function handleMessages(req, res) {
     const messages = req.body.messages.reduce((prev, current) => {
         if (current.role === 'appUser') {
             prev.push(current);
@@ -57,17 +92,9 @@ app.post('/webhook', function(req, res, next) {
         return res.end();
     }
 
-    const appUser = req.body.appUser;
-    const userId = appUser.userId || appUser._id;
     const stateMachine = new StateMachine({
         script,
-        bot: new SmoochApiBot({
-            name,
-            avatarUrl,
-            lock,
-            store,
-            userId
-        })
+        bot: createBot(req.body.appUser)
     });
 
     stateMachine.receiveMessage(messages[0])
@@ -77,6 +104,33 @@ app.post('/webhook', function(req, res, next) {
             console.error(err.stack);
             res.end();
         });
+}
+
+function handlePostback(req, res) {
+    const postback = req.body.postbacks[0];
+    if (!postback || !postback.action) {
+        res.end();
+    }
+
+    createBot(req.body.appUser).say(`You said: ${postback.action.text} (payload was: ${postback.action.payload})`)
+        .then(() => res.end());
+}
+
+app.post('/webhook', function(req, res, next) {
+    const trigger = req.body.trigger;
+
+    switch (trigger) {
+        case 'message:appUser':
+            handleMessages(req, res);
+            break;
+
+        case 'postback':
+            handlePostback(req, res);
+            break;
+
+        default:
+            console.log('Ignoring unknown webhook trigger:', trigger);
+    }
 });
 
 var server = app.listen(process.env.PORT || 8000, function() {
