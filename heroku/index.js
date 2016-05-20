@@ -59,11 +59,11 @@ if (process.env.SERVICE_URL) {
                 return createWebhook(smoochCore, target);
             }
 
-            const missingTriggers = webhookTriggers.every((t) => {
+            const hasAllTriggers = webhookTriggers.every((t) => {
                 return existingWebhook.triggers.indexOf(t) !== -1;
             });
 
-            if (!missingTriggers) {
+            if (!hasAllTriggers) {
                 updateWebhook(smoochCore, existingWebhook);
             }
         });
