@@ -55,7 +55,6 @@ module.exports = function( airportType, nextState ){
         return bot.getProp( listName ).then( list  => {
           var item = list[ opt - 1 ];
           return bot.setProp( keyName, item ).then(() =>{
-            //console.log( JSON.stringify( bot.store, null, 2 ) );
             return bot.say( item.displayText + '\nThankyou!\n' )
               .then(() => nextState )
           });
@@ -63,10 +62,8 @@ module.exports = function( airportType, nextState ){
         });
       }
       else if( opt === "No" ){
-        return bot.getState(( state ) => {
-          return bot.say( 'Let\'s try again' )
-            .then( ()=> state );
-        });
+        return bot.say( 'Let\'s try again' )
+          .then( ()=> firstStepName );
       }
       else
         return repeat( bot );
