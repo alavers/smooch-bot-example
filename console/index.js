@@ -24,9 +24,14 @@ const script = new Script({
     start: {
         receive: (bot) => {
             return bot.say('Hi! I\'m Smooch Bot!')
-                .then(() => 'askName');
+                .then(() => 'charter.pax');
         }
     },
+
+    'charter.pax': require('./charter.pax'),
+    'charter.search-estimates': require('./charter.search-estimates'),
+
+
 
     askName: {
         prompt: (bot) => bot.say('What\'s your name'),
@@ -37,6 +42,8 @@ const script = new Script({
                 .then(() => 'finish');
         }
     },
+
+
 
     finish: {
         receive: (bot, message) => {
