@@ -1,6 +1,6 @@
 {
   "name": "smooch-bot-example",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Smooch Bot Example Apps",
   "author": "Andrew Lavers <alavers@system42.net> (http://smooch.io/)",
   "scripts": {
@@ -13,7 +13,7 @@
     "hbs": "^4.0.0",
     "jsonwebtoken": "^5.7.0",
     "smooch-bot": "^1.0.1",
-    "smooch-core": "^0.0.15"
+    "smooch-core": "^2.0.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
