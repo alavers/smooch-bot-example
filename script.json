@@ -1,0 +1,14 @@
+{
+    "YO BOT": "If you're interested in a website, enter \"WEBSITE\". If you're an existing client and need website help, enter \"HELP\". If you're just visiting, enter \"MORE\".",
+    "WEBSITE": "Tell me a little bit about your project by entering \"MY PROJECT IS\" followed by a brief description about your website.",
+    "MY PROJECT IS": "Neat! Now tell me what your timeline is by entering \"MY TIMELINE IS\" followed by when you'd want your project by.",
+    "MY TIMELINE IS": "I see. Do you have a budget? If so enter \"BUDGET\" followed by your budget. If you don't have a budget, enter \"NO BUDGET\".",
+    "NO BUDGET": "Cool. I'll make sure to put you at the top of Miguel's list. Give me your email by entering \"EMAIL\" followed by your email address.",
+    "EMAIL": "Perfect. Miguel will reach out to you very soon. Nice talking to ya! If you'd like to talk some more, enter \"MORE\".",
+    "HELP": "I'm currently analyzing all of Miguel's records so I can intelligently assist you. Please come back soon.",
+    "MORE": "Want to learn more about Miguel? Enter \"ABOUT MIGUEL\". You can also learn more about his website work by entering \"WORK\".",
+    "ABOUT MIGUEL": "Miguel makes things for the web and studies Human Computer Interaction. He's passionate about simplistic design and helping make the world a better place. Check out some of his work by entering \"WORK\".",
+    "WORK": "Check out Miguel's work by going to this link: miguelmolina.co/work. If you need a website, enter \"WEBSITE\".",
+    "CONNECT ME": "",
+    "DISCONNECT": "Roger that, Bot is back."
+}
